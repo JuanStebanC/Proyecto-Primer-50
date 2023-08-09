@@ -3,57 +3,59 @@ package edu.uptc.model;
 import java.time.LocalDate;
 
 public class Phone {
-	String imei;
-	String number;
-	LocalDate manufacturingDate;
-	
-	private CellPlan cellplan;
+	private CellPlan cellPlan;
+    private String imei;
+    private String number;
+    private LocalDate manufacturingDate;
+    
+    public Phone(CellPlan cellPlan, String imei, String number, LocalDate manufacturingDate) {
+        this.cellPlan = cellPlan;
+        this.imei = imei;
+        this.number = number;
+        this.manufacturingDate = manufacturingDate;
+    }
 
-	public Phone(String imei, String number, LocalDate manufacturingDate, CellPlan cellplan) {
-		super();
-		this.imei = imei;
-		this.number = number;
-		this.manufacturingDate = manufacturingDate;
-		this.cellplan = cellplan;
-	}
+    public void setCellPlan(CellPlan cellPlan) {
+        this.cellPlan = cellPlan;
+    }
 
-	public String getImei() {
-		return imei;
-	}
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
 
-	public void setImei(String imei) {
-		this.imei = imei;
-	}
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
-	public String getNumber() {
-		return number;
-	}
+    public void setManufacturingDate(LocalDate manufacturingDate) {
+        this.manufacturingDate = manufacturingDate;
+    }
 
-	public void setNumber(String number) {
-		this.number = number;
-	}
+    public CellPlan getCellPlan() {
+        return cellPlan;
+    }
 
-	public LocalDate getManufacturingDate() {
-		return manufacturingDate;
-	}
+    public String getImei() {
+        return imei;
+    }
 
-	public void setManufacturingDate(LocalDate manufacturingDate) {
-		this.manufacturingDate = manufacturingDate;
-	}
+    public String getNumber() {
+        return number;
+    }
 
-	public CellPlan getCellplan() {
-		return cellplan;
-	}
+    public LocalDate getManufacturingDate() {
+        return manufacturingDate;
+    }
+    
+    public int getAge(){
+        return 0;
+    }
 
-	public void setCellplan(CellPlan cellplan) {
-		this.cellplan = cellplan;
-	}
+    @Override
+    public String toString() {
+        return "Phone [cellPlan=" + cellPlan + ", imei=" + imei + ", number=" + number + ", manufacturingDate="
+                + manufacturingDate + "]";
+    }
 
-	@Override
-	public String toString() {
-		return "Phone [imei=" + imei + ", number=" + number + ", manufacturingDate=" + manufacturingDate + ", cellplan="
-				+ cellplan + "]";
-	}
-	
 	
 }
