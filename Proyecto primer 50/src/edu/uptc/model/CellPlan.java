@@ -27,7 +27,7 @@ public class CellPlan {
 
     @Override
     public String toString() {
-        return "CellPlan [description=" + description + ", minutes=" + minutes + "]";
+        return "CellPlan description: \n" + description + "\n minutes:" + minutes;
     }
 
 }

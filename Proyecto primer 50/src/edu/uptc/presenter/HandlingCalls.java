@@ -66,30 +66,32 @@ public class HandlingCalls {
         return 0;
     }
 
-    public boolean registryCall(String imei, String number, int minutes){
-
+    public boolean registryCall(String imei, String number, int minutes) {
         Phone phone = servicePhone.findPhone(imei);
-        String numberStr = "";
-        numberStr = String.valueOf(number); 
+        String numberStr = String.valueOf(number); 
 
         if (phone != null) {
-            if (numberStr.length() == 10) {
-                
-                return servicePhone.registryCall(phone, minutes, ETypeCall.MOVIL);
+            CellPlan cellPlan = phone.getCellPlan();
+            
+            if (numberStr.length() == 10 && cellPlan.getMinutes() >= minutes) {
+                int deductedMinutes = minutes;
+                return servicePhone.registryCall(phone, deductedMinutes, ETypeCall.MOVIL);
 
-            } else if (numberStr.length() == 6){                
-                
-                return servicePhone.registryCall(phone, minutes, ETypeCall.FIXED);
+            } else if (numberStr.length() == 6 && cellPlan.getMinutes() >= minutes * 2) {
+                int deductedMinutes = minutes * 2;
+                return servicePhone.registryCall(phone, deductedMinutes, ETypeCall.FIXED);
 
-            } else if (numberStr.length() != 10 & numberStr.length() != 6){
-                
-                return servicePhone.registryCall(phone, minutes, ETypeCall.INTERNATIONAL);
+            } else if (cellPlan.getMinutes() >= minutes * 3) {
+                int deductedMinutes = minutes * 3;
+                return servicePhone.registryCall(phone, deductedMinutes, ETypeCall.INTERNATIONAL);
             }
-
-        } 
+        }
 
         return false;
     }
+
+
+
     
 
 

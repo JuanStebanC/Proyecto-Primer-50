@@ -163,25 +163,31 @@ public class Runner {
         
     }
 
-    public void findPhone(){
+    public void findPhone() {
         String imei = "";
         System.out.println("--- Enter the IMEI you want to search ---");
         imei = sc.nextLine();
 
         while (imei.length() != 15) {
-
-            System.out.println("*** The IMEI moust have 15 characters, enter a correct phone IMEI ***");
+            System.out.println("*** The IMEI must have 15 characters, enter a correct phone IMEI ***");
             imei = sc.nextLine();
-
         }
 
-        System.out.println(handlingCalls.findPhone(imei));
-        System.out.println("Falta cambiar fecha por solamente el año y mejorar el string");
-
+        try {
+            String result = handlingCalls.findPhone(imei);
+            if (result != null) {
+                System.out.println(result);
+            } else {
+                System.out.println("Phone not found");
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Phone not found");
+        }
     }
 
-    public void addMinutes(){
 
+
+    public void addMinutes() {
         String imei = "";
         System.out.println("--- Enter the phone IMEI ---");
         imei = sc.nextLine();
@@ -189,10 +195,8 @@ public class Runner {
         boolean validation = true;
 
         while (imei.length() != 15) {
-
-            System.out.println("*** The IMEI moust have 15 characters, enter a correct phone IMEI ***");
+            System.out.println("*** The IMEI must have 15 characters, enter a correct phone IMEI ***");
             imei = sc.nextLine();
-
         }
 
         System.out.println("--- Enter the number of minutes ---");
@@ -201,37 +205,36 @@ public class Runner {
 
         do {
             try {
-
                 minutes = Integer.parseInt(minutesStr);
                 validation = false;                
-            
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 System.out.println("*** Enter a correct number ***");
                 minutesStr = sc.nextLine();
             }
         } while (validation);
 
-        System.out.println(handlingCalls.addMinutes(imei, minutes));
-
-
+        try {
+            int newMinutes = handlingCalls.addMinutes(imei, minutes);
+            System.out.println("New minutes: " + newMinutes);
+        } catch (NullPointerException e) {
+            System.out.println("Phone not found");
+        }
     }
 
-    public void registryCall(){
+
+    public void registryCall() {
         String imei = "";
         String number = "";
         int numberMin = 0;
         boolean validation = true;
-        int option = 0;
         String minutes = "";
 
         System.out.println("--- Enter the IMEI ---");
         imei = sc.nextLine();
 
         while (imei.length() != 15) {
-
-            System.out.println("*** The IMEI moust have 15 characters, enter a correct phone IMEI ***");
+            System.out.println("*** The IMEI must have 15 characters, enter a correct phone IMEI ***");
             imei = sc.nextLine();
-
         }
 
         System.out.println("--- Enter the telephone number you wish to call ---");
@@ -239,41 +242,41 @@ public class Runner {
 
         do {
             try {
-
-            long numberNum1 = Long.parseLong(number);
-            validation = false;
-            
+                long numberNum1 = Long.parseLong(number);
+                validation = false;
             } catch (NumberFormatException e) {
                 System.out.println("*** Enter a correct number ***");
                 number = sc.nextLine();
             }
         } while (validation);
 
-
         System.out.println("--- Enter the minutes consumed ---");
         minutes = sc.nextLine();
 
+        validation = true;
         do {
             try {
-
-            numberMin = Integer.parseInt(minutes);
-            validation = false;
-            
+                numberMin = Integer.parseInt(minutes);
+                validation = false;
             } catch (NumberFormatException e) {
                 System.out.println("*** Enter a correct minutes ***");
                 minutes = sc.nextLine();
             }
         } while (validation);
 
-        if (handlingCalls.registryCall(imei, number, numberMin) != true) {
-            System.out.println("Registered call");
-        } else {
-            System.out.println("Insufficient minutes");
-        }
+        try {
+            if (handlingCalls.registryCall(imei, number, numberMin)) {
+                System.out.println("Registered call");
+            } else {
+                System.out.println("Insufficient minutes");
+            }
 
-        //System.out.println(handlingCalls.registryCall(imei, number, numberMin));
-        System.out.println(handlingCalls.findPhone(imei));
+            System.out.println(handlingCalls.findPhone(imei));
+        } catch (NullPointerException e) {
+            System.out.println("Phone not found");
+        }
     }
+
 
 
 }

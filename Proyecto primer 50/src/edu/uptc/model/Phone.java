@@ -1,6 +1,7 @@
 package edu.uptc.model;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Phone {
 	private CellPlan cellPlan;
@@ -47,14 +48,16 @@ public class Phone {
         return manufacturingDate;
     }
     
-    public int getAge(){
-        return 0;
+    public int getAge() {
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(manufacturingDate, today);
+        return period.getYears();
     }
 
     @Override
     public String toString() {
-        return "Phone [cellPlan=" + cellPlan + ", imei=" + imei + ", number=" + number + ", manufacturingDate="
-                + manufacturingDate + "]";
+        return "Phone cellPlan: " + cellPlan + "\n Imei: " + imei + "\n Number: " + number + "\n Manufacturing age: "
+                + getAge();
     }
 
 	
