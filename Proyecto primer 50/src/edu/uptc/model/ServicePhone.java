@@ -87,8 +87,8 @@ public class ServicePhone {
             if (oldMinutes < 2) {
                 return false;
             } 
-            
-            newMinutes = oldMinutes - (minutes * 2);
+
+            newMinutes = oldMinutes - minutes;
             phone.getCellPlan().setMinutes(newMinutes);
             return true;
 
@@ -98,7 +98,7 @@ public class ServicePhone {
                 return false;
             } 
 
-            newMinutes = oldMinutes - (minutes * 3);
+            newMinutes = oldMinutes - minutes;
             phone.getCellPlan().setMinutes(newMinutes);
             return true;
 
