@@ -153,14 +153,7 @@ public class Runner {
             }
         } while (validation);
         
-        operation = handlingCalls.addPhone(imei, number, manufacturingDate, description, minutes);
-
-        if (operation = true) {
-            System.out.println("Successful operation");
-        } else if (operation = false){
-            System.out.println("An error ocurred");
-        }
-        
+        operation = handlingCalls.addPhone(imei, number, manufacturingDate, description, minutes);       
     }
 
     public void findPhone() {
